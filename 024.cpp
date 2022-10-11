@@ -1,19 +1,30 @@
-#include <iostream>
-#include <vector>
-#include <deque>
-#include <algorithm>
+#include <bits/stdc++.h>
 using namespace std;
 
-vector<vector< int > > G(102);
+vector< vector < int > > G(102);
 vector<int> dist_d(102, -1);
 vector<int> dist_f(102, -1);
-int t = 0;
+int t = 1;
+
+void dfs(int from)
+{
+    dist_d.at(from) = t;
+
+    for (int next : G.at(from)) {
+        if (dist_d.at(next) != -1) continue;
+        t++;
+        dfs(next);
+    }
+
+    t++;
+    dist_f.at(from) = t;
+
+}
 
 int main()
 {
     int n, k, u, v;
     cin >> n;
-    deque<int> q;
 
     for (int i = 0; i < n; i++) {
         cin >> u >> k;
@@ -23,20 +34,14 @@ int main()
         }
     }
 
-    q.push_back(1);
-    dist_d.at(1) = 0;
-    while(!q.empty()) {
-        u = q.front();
-        q.pop_front();
-        for (int next : G.at(u)) {
-            if (dist_d.at(next) != -1) continue;
-            dist_d.at(next) = dist_d.at(u) + 1;
-            q.push_back(next);
-        }
+    for (int i = 0; i < n; i++) {
+        sort(G.at(i).begin(), G.at(i).end());
     }
 
+    dfs(1);
+
     for (int i = 1; i <= n; i++) {
-        cout << i << " " << dist_d.at(i) << endl;
+        cout << i << " " << dist_d.at(i) << " " << dist_f.at(i) << endl;
     }
 
     return 0;
