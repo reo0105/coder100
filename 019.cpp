@@ -5,14 +5,14 @@ using namespace std;
 
 int binary_search(vector<int> dis, int key, int size)
 {
-    int left = 0, right = size;
+    int left = -1, right = size;
     int mid;
 
-    while (left < right) {
+    while (right - left > 1) {
         mid = (left + right) / 2;
         if (dis.at(mid) == key) return mid;
         else if (dis.at(mid) > key) right = mid;
-        else left = mid + 1;
+        else left = mid;
     }
 
     return mid;
