@@ -16,7 +16,7 @@ int main()
 
     for (int i = 0; i < n; i++) {
         for (int j = 0; j <= W; j++) {
-            if(j-w.at(i+1) >= 0) dp.at(i+1).at(j) = max(dp.at(i).at(j), dp.at(i+1).at(j-w.at(i+1)) + v.at(i+1));
+            if(j-w.at(i+1) >= 0) dp.at(i+1).at(j) = max(dp.at(i+1).at(j), dp.at(i+1).at(j-w.at(i+1)) + v.at(i+1));
             else dp.at(i+1).at(j) = dp.at(i).at(j);
         }
     }
